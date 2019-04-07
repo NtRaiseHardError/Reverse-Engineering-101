@@ -36,7 +36,7 @@ main endp
 
 This is the output given by IDA. Because I've compiled with symbols, IDA can recognise that this is the `main` function and has shown the definition `int __cdecl main(int argc, const char **argv, const char **envp)`. But let's not get distracted by the surrounding information for now and instead focus on the generated assembly...
 
-First of all, reading Intel assembly can be confusing if you are not used to it. The way you read it is `<instruction> <src> <dest>`. Keep that in mind! These three-letter "words", `ebp`, `esp`, `eax`, are called "registers". Imagine them as sort of like variables as they will hold values/data.
+First of all, reading Intel assembly can be confusing if you are not used to it. The way you read it is `<instruction> <dest> <src>`. Keep that in mind! These three-letter "words", `ebp`, `esp`, `eax`, are called "registers". Imagine them as sort of like variables as they will hold values/data.
 
 It is fundamental to know that return values of functions are done via the `eax` register. If a function has a return value, i.e. doesn't have a `void` return type, it will give the return value to `eax` before returning. Here, our code was told to `return 0` and so, in the generated assembly, we can see `mov eax, 0` where `eax` will be given the value 0. Just a heads up, the `mov` instruction may be "move" but it is actually a **copy**. Remember that! So the `mov ebp, esp` instruction means that it is **copying** the value from the `esp` register into the `ebp` register. 
 
