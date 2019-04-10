@@ -2,7 +2,7 @@
 
 In this tutorial, we'll be going over the basic structure of functions and the classic Hello World example. We'll be covering what was explained in the previous tutorial so make sure you've caught up with that.
 
-## Example I
+## Example
 
 Consider the following code:
 
@@ -41,11 +41,17 @@ main endp
 
 We can identify the `return 0` assembly right away that we learned in the previous tutorial as well as the other same instructions. The only difference here, in comparison with the previous tutorial's disassembly, is the `push offset aHelloWorld`, `call _printf` and `add esp, 4`. It's obvious from the `_printf` symbol and the `call` instruction that this is the `printf` function call from the source and by deduction, the `push offset aHelloWorld` is the parameter.
 
-I'd like to point out that reverse engineering is not only the ability to read assembly but it's also the skill to be able to draw conclusions from given context. Recognising the differences between this and the previous tutorial's disassembly as well as making the connection from the source and its dissasembly to understand how the `printf` function and its argument is important critical thinking.
+I'd like to point out that reverse engineering is not only the ability to read assembly but it's also the skill to be able to draw conclusions from given context. Recognising the differences between this and the previous tutorial's disassembly as well as making the connection from the source and its dissasembly to understand how the `printf` function and its argument work is important critical thinking.
 
 Finally, there is also the `add esp, 4` which you may or may not have connected to the function call. Its purpose is to "undo" the `push offset aHelloWorld`. That's all that you need to know for now as it will be covered in a later tutorial.
 
-The `aHelloWorld` symbol is actually an address that IDA has automatically analysed as a string and relabeled to something appropriate. The address exists within the `.rdata` or `.rodata` section/segment of the executable file. This section is "read-only" data so it cannot be read or written to. This is similar to that of a global variable (that cannot be modified).
+The `aHelloWorld` symbol is actually an address that IDA has automatically analysed as a string and relabeled to something appropriate. It simply points to the start of the string as described by the definition of a (string/char) pointer in C as shown here:
+
+```asm
+.rodata:080484C0 aHelloWorld     db 'Hello world!',0Ah,0
+```
+
+The address exists within the `.rdata` or `.rodata` section/segment of the executable file. This section is "read-only" data so it cannot be read or written to. This is similar to that of a global variable (that cannot be modified).
 
 ## Decompilation
 
