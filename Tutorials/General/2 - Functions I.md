@@ -47,6 +47,8 @@ Finally, there is also the `add esp, 4` which you may or may not have connected 
 
 The `aHelloWorld` symbol is actually an address that IDA has automatically analysed as a string and relabeled to something appropriate. The address exists within the `.rdata` or `.rodata` section/segment of the executable file. This section is "read-only" data so it cannot be read or written to. This is similar to that of a global variable (that cannot be modified).
 
+## Decompilation
+
 So let's attempt to decompile the dissassembly back into C. First, we know that this is a `main` function from the symbols shown by IDA.
 
 ```c
