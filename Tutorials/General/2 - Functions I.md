@@ -51,7 +51,7 @@ The `aHelloWorld` symbol is actually an address that IDA has automatically analy
 .rodata:080484C0 aHelloWorld     db 'Hello world!',0Ah,0
 ```
 
-The address exists within the `.rdata` or `.rodata` section/segment of the executable file. This section is "read-only" data so it cannot be read or written to. This is similar to that of a global variable (that cannot be modified).
+The address exists within the `.rdata` or `.rodata` section/segment of the executable file. This section is "read-only" data so it cannot be written to. This is similar to that of a global variable (that cannot be modified).
 
 ## Decompilation
 
