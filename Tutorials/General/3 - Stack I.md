@@ -1,6 +1,6 @@
 # Stack I
 
-In this tutorial, we'll be going over the concept of the stack. This concept will cover the disregarded information over the past two tutorials regarding the `ebp` and `esp` registers as well as the `push` and `pop` instructions. It is fundamental knowledge that is needed to understand function calls.
+In this tutorial, we'll be going over the concept of the stack. This concept will cover the information over the past two tutorials regarding the `ebp` and `esp` registers as well as the `push` and `pop` instructions. It is fundamental knowledge that is needed to understand function calls.
 
 ## Stack Layout
 
