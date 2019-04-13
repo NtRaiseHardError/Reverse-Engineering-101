@@ -98,7 +98,7 @@ These two registers help create the current stack "frame". The `ebp` register is
 
 Let's go through the first instruction `push ebp`. Here is an example of a stack before the instruction:
 
-```asm
+```
 Before pushing ebp
 
         +----------------+  Top of stack = 0x0
@@ -132,7 +132,7 @@ Before pushing ebp
 
 We see `ebp` at the bottom and `esp` at the top. Together, we see that they form the function's frame. Each "segment" is 4 bytes. To `push` a value, there are two steps: move `esp` up one "segment" (4 bytes) and then move the value into the "newly created segment" like so:
 
-```asm
+```
 Pushing ebp
 
         +----------------+  Top of stack = 0x0
@@ -166,7 +166,7 @@ Pushing ebp
 
 Now let's do the `mov ebp, esp` instruction. Remember that `mov` is a **copy**!
 
-```asm
+```
 Move esp into ebp
 
         +----------------+  Top of stack = 0x0
@@ -200,7 +200,7 @@ Move esp into ebp
 
 And finally, the last instruction `pop ebp`. `pop`ing is the reverse of `push` and is done like so: move the value, from where `esp` points, into the specified register in the instruction (`ebp`) and move `esp` down a "segment" (4 bytes). Here is what it will look like:
 
-```asm
+```
 Popping ebp
 
         +----------------+  Top of stack = 0x0
