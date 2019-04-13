@@ -4,7 +4,7 @@ In this tutorial, we'll be going over the concept of the stack. This concept wil
 
 ## Stack Layout
 
-The stack is a special area of memory that is reserved for storing, preserving and passing data around by the code. It has the name "stack" because it is as the word describes, a "stack" of data. Imagine the stack as a pile of plates where the plates are data. 
+The stack is a special area of memory that is reserved for storing, preserving and passing data around by the code. It has the name "stack" because it is as the word describes, a "stack" of data. Imagine the stack as a pile of plates where the data are plates. 
 
 ```
 +----------------+  Top
@@ -24,7 +24,7 @@ The stack is a special area of memory that is reserved for storing, preserving a
  Stack of plates
 ```
 
-The way you **store** or **preserve** the plate is by putting it on **top** of the stack, i.e. `push`ing. 
+The way you **store** (or **preserve**) the plate is by putting it on **top** of the stack, i.e. `push`ing. 
 
 ```
 Pushing a plate onto the top
@@ -79,7 +79,7 @@ Popping a plate off the top
  Stack of plates
 ```
 
-The stack is defined to grow towards **lower** memory address values, i.e. towards 0, whereas the bottom of the stack points towards the **higher** memory address values. And because we `push` and `pop` from the top, we will display the top of the stack at... the top... and the bottom at... the bottom... Makes sense, right? From my experience, it's commonly taught the other way around (flipped) which doesn't help at all. Consistency is key, so follow one convention. These tutorials will use the former convention.
+The stack is defined to "grow" (by `push`ing) towards **lower** memory address values, i.e. towards 0, whereas the bottom of the stack points towards the **higher** memory address values. And because we `push` and `pop` from the top, we will display the top of the stack at... the top... and the bottom at... the bottom... Makes sense, right? From my experience, it's commonly taught the other way around (flipped) which doesn't help at all. Consistency is key, so follow one convention. These tutorials will use the former convention.
 
 ## Function Prologues and Epilogues
 
@@ -130,7 +130,7 @@ Before pushing ebp
               Stack
 ```
 
-We see `ebp` at the bottom and `esp` at the top. Together, we see that they form the function's region. Each "segment" is 4 bytes. To `push` a value, there are two steps: move `esp` up one "segment" (4 bytes) and then move the value into the "newly created segment" like so:
+We see `ebp` at the bottom and `esp` at the top. Together, we see that they form the function's frame. Each "segment" is 4 bytes. To `push` a value, there are two steps: move `esp` up one "segment" (4 bytes) and then move the value into the "newly created segment" like so:
 
 ```asm
 Pushing ebp
@@ -139,7 +139,7 @@ Pushing ebp
 0x0     |      ...       |
         +----------------+
 0x4     |      ...       |
-        +----------------+  esp = 0x8 <-- move esp here (new esp)
+        +----------------+  esp = 0x8 <-- move esp up a "segment" (new esp)
 0x8     |   ebp = 0x20   |  <-- Insert the value of ebp here
         +----------------+  (old esp here)
 0xC     |     Value 1    |
@@ -173,7 +173,7 @@ Move esp into ebp
 0x0     |      ...       |
         +----------------+
 0x4     |      ...       |
-        +----------------+  esp = ebp = 0x8 (new esp) <-- move ebp here
+        +----------------+  esp = ebp = 0x8 <-- move ebp here (new ebp)
 0x8     |   ebp = 0x20   |  
         +----------------+  (old esp here)
 0xC     |     Value 1    |
@@ -209,7 +209,7 @@ Popping ebp
 0x4     |      ...       |
         +----------------+  (old esp and ebp here)
 0x8     |   ebp = 0x20   |  <-- give this value to ebp
-        +----------------+  esp = 0xC (new esp) <-- move esp down a "segment"
+        +----------------+  esp = 0xC <-- move esp down a "segment" (new esp)
 0xC     |     Value 1    |
         +----------------+
 0x10    |     Value 2    |
@@ -221,7 +221,7 @@ Popping ebp
 0x1C    |      ...       |
         +----------------+
 0x20    |     Value n    |
-        +----------------+  ebp = 0x20  <-- move ebp here (new ebp here)
+        +----------------+  ebp = 0x20  <-- move ebp here (new ebp)
 0x24    |      ...       |
         +----------------+
 0x28    |      ...       |
@@ -231,3 +231,5 @@ Popping ebp
         
               Stack
 ```
+
+Notice that the `ebp` value on the stack remains there! It does not get cleared and will only change when something else is moved there to replace it!
