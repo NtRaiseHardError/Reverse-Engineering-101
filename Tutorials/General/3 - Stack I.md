@@ -130,7 +130,7 @@ Before pushing ebp
               Stack
 ```
 
-We see `ebp` at the bottom and `esp` at the top. Together, we see that they form the function's frame. Each "segment" is 4 bytes. To `push` a value, there are two steps: move `esp` up one "segment" (4 bytes) and then move the value into the "newly created segment" like so:
+We see `ebp` at the bottom and `esp` at the top. Together, we see that they form the function's frame. Each "segment" is 4 bytes. To `push` a value, there are two steps: move `esp` up one "segment" (4 bytes) and then move the value into the "newly created segment" (like pushing a plate) like so:
 
 ```
 Pushing ebp
@@ -198,7 +198,9 @@ Move esp into ebp
               Stack
 ```
 
-And finally, the last instruction `pop ebp`. `pop`ing is the reverse of `push` and is done like so: move the value, from where `esp` points, into the specified register in the instruction (`ebp`) and move `esp` down a "segment" (4 bytes). Here is what it will look like:
+Right now, the frame is flat but in a later, we will go through an example of growing the frame to reserve space for data storage.
+
+And finally, the last instruction `pop ebp`. `pop`ing is the reverse of `push` and is done like so: move the value, from where `esp` points, into the specified register in the instruction (`ebp`) and move `esp` down a "segment" (4 bytes) (like removing a plate). Here is what it will look like:
 
 ```
 Popping ebp
@@ -209,7 +211,7 @@ Popping ebp
 0x4     |      ...       |
         +----------------+  (old esp and ebp here)
 0x8     |   ebp = 0x20   |  <-- give this value to ebp
-        +----------------+  esp = 0xC <-- move esp down a "segment" (new esp)
+        +----------------+  esp = 0xC <-- move esp down a "segment" (original esp)
 0xC     |     Value 1    |
         +----------------+
 0x10    |     Value 2    |
@@ -221,7 +223,7 @@ Popping ebp
 0x1C    |      ...       |
         +----------------+
 0x20    |     Value n    |
-        +----------------+  ebp = 0x20  <-- move ebp here (new ebp)
+        +----------------+  ebp = 0x20  <-- move ebp here (original ebp)
 0x24    |      ...       |
         +----------------+
 0x28    |      ...       |
