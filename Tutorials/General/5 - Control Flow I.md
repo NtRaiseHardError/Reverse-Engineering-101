@@ -86,7 +86,7 @@ retn
 main endp
 ```
 
-The disassembly shows the local variables as generic `var_X` labels. To figure out which one is `a` and which is `b`, we can simply follow thea assignments of the `1` and `2` values. Let's rename `var_10` to `a` and `var_C` to `b`.
+The disassembly shows the local variables as generic `var_X` labels. To figure out which one is `a` and which is `b`, we can simply follow the assignments of the `1` and `2` values. Let's rename `var_10` to `a` and `var_C` to `b`.
 
 ```asm
 ; int __cdecl main(int argc, const char **argv, const char **envp)
@@ -165,7 +165,7 @@ The first two instructions give our local variables their values `1` and `2`. Th
 
 So why do a subtraction if the value isn't saved to the operands? The resulting effect is echoed into what's known as the _EFLAGS_. These flags indicate the status of certain operations, for example, if the result is zero (ZF), if there's a carry (CF), if there's a negative sign (SF). The `jcc` set of instructions (conditional `jmp`s) will either jump or not jump `eip` depending on whether certain flags are set or not.
 
-Back to the `cmp` instruction, it affects multiple flags but the one we are concerned with are the OF and SF. The `jge` conditional jump will read these two flags and jump only if `SF = OF` (overflow flag). Essentially, if the subtraction becomes negative, `1 - 2 < 0` then the condition is **not** satisfied and therefore will **not** jump. And since the subtraction is indeed negative, the jump is **not** taken. This is how these instructions work. If this is too confusing then it may be much simpler to just compare it like: "is 1 greater than or equal to 2?" and of course, the answer is no, hence, the jump is **not** taken. If the `jge` is **not** taken, then it will run down into the `puts` function and print `a < b`.
+Back to the `cmp` instruction, it affects multiple flags but the one we are concerned with are the `OF` (overflow flag) and `SF`. The `jge` conditional jump will read these two flags and jump only if `SF = OF`. Essentially, if the subtraction becomes negative, `1 - 2 < 0`, then the condition is **not** satisfied and therefore will **not** jump. And since the subtraction is indeed negative, the jump is **not** taken. This is how these instructions work. If this is too confusing then it may be much simpler to just compare it like: "is 1 greater than or equal to 2?" and of course, the answer is no, hence, the jump is **not** taken. If the `jge` is **not** taken, then it will run down into the `puts` function and print `a < b`.
 
 Let's take a look at the next `if` statement:
 
