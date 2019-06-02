@@ -198,7 +198,7 @@ Move esp into ebp
               Stack
 ```
 
-Right now, the frame is flat but in a later, we will go through an example of growing the frame to reserve space for data storage.
+Right now, the frame is flat but later, we will go through an example of growing the frame to reserve space for data storage.
 
 And finally, the last instruction `pop ebp`. `pop`ing is the reverse of `push` and is done like so: move the value, from where `esp` points, into the specified register in the instruction (`ebp`) and move `esp` down a "segment" (4 bytes) (like removing a plate). Here is what it will look like:
 
