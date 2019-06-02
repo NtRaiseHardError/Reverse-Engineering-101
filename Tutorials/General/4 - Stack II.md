@@ -265,7 +265,7 @@ Local variable sum in main
       Stack
 ```
 
-So when compiling the C code down to assembly, it has created this abstracted concept of the stack frame to store the local variable within the stack, specifically within the function's frame, and can now reference its location by using the `ebp` register as the base offset and then adding an offset to locate a specific variable, i.e. `-4` is added to `ebp` to reference the `sum` local variable. The `dword` adjective describes a 4-byte value, i.e. an `int` as we had defined in C. After this instruction is executed, the `sum` variable will be `0`.
+So when compiling the C code down to assembly, it has created this abstracted concept of the stack frame to store the local variable within the stack, specifically within the function's frame, and can now reference its location by using the `ebp` register as the base and then adding an offset to locate a specific variable, i.e. `-4` is added to `ebp` to reference the `sum` local variable. The `dword` adjective describes a 4-byte value, i.e. an `int` as we had defined in C. After this instruction is executed, the `sum` variable will be `0`.
 
 ```
 mov sum, 0
@@ -345,7 +345,7 @@ push 2; push 1
       Stack
 ```
 
-Now comes the `call add`. When a `call` instruction is executed, two things happen. The first is that it will reserve the value of the **next** instruction of `eip` in the stack, i.e. `add esp, 8`. The reason it does this is because it will need to keep track of where to continue from after leaving the `add` function. 
+Now comes the `call add`. When a `call` instruction is executed, two things happen. The first is that it will reserve the address of the **next** instruction of `eip` in the stack, i.e. `add esp, 8`. The reason it does this is because it will need to keep track of where to continue from after leaving the `add` function. 
 
 ```asm
 ; ...
